@@ -1,0 +1,923 @@
+/* Provider Availability Management Component Styles */
+.provider-availability-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  padding: 1.5rem;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Notifications */
+.notification {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 400px;
+  animation: slideInRight 0.3s ease-out;
+  font-weight: 500;
+}
+
+.notification-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.notification-error {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+}
+
+.notification-warning {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+}
+
+.notification button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+.notification button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Page Header */
+.page-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  color: #1e293b;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.025em;
+}
+
+.page-header p {
+  color: #64748b;
+  font-size: 1.125rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Calendar Header */
+.calendar-header {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.calendar-navigation {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-button {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #e2e8f0;
+  background: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #64748b;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-button:hover {
+  border-color: #3730a3;
+  color: #3730a3;
+  transform: translateY(-1px);
+}
+
+.date-display h2 {
+  color: #1e293b;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  min-width: 250px;
+  text-align: center;
+}
+
+.today-button {
+  background: linear-gradient(135deg, #3730a3 0%, #1e3a8a 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(55, 48, 163, 0.3);
+}
+
+.today-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(55, 48, 163, 0.4);
+}
+
+.view-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.view-toggle {
+  display: flex;
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 0.25rem;
+  gap: 0.25rem;
+}
+
+.view-btn {
+  padding: 0.75rem 1.25rem;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+}
+
+.view-btn.active {
+  background: white;
+  color: #3730a3;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.view-btn:hover:not(.active) {
+  color: #3730a3;
+}
+
+.add-availability-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  padding: 0.875rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  font-size: 0.875rem;
+}
+
+.add-availability-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+}
+
+/* Main Content Layout */
+.availability-content {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* Calendar Section */
+.calendar-section {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  min-height: 600px;
+}
+
+.calendar-view {
+  width: 100%;
+  height: 100%;
+}
+
+.calendar-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 12px;
+  border: 2px dashed #cbd5e0;
+  text-align: center;
+}
+
+.calendar-placeholder p:first-child {
+  font-size: 2rem;
+  color: #3730a3;
+  margin: 0 0 1rem 0;
+  font-weight: 600;
+}
+
+.calendar-placeholder p:last-child {
+  color: #64748b;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Sidebar Section */
+.sidebar-section {
+  position: sticky;
+  top: 1.5rem;
+}
+
+.availability-list {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  max-height: 700px;
+  overflow-y: auto;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.list-header h3 {
+  color: #1e293b;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.bulk-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.bulk-delete-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bulk-delete-btn:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+.slots-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #64748b;
+}
+
+.empty-state p {
+  margin: 0 0 1.5rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.empty-action-btn {
+  background: linear-gradient(135deg, #3730a3 0%, #1e3a8a 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+}
+
+.empty-action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(55, 48, 163, 0.3);
+}
+
+/* Availability Slots */
+.availability-slot {
+  border: 2px solid #f1f5f9;
+  border-radius: 12px;
+  padding: 1rem;
+  background: white;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.availability-slot:hover {
+  border-color: #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.availability-slot.selected {
+  border-color: #3730a3;
+  background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+}
+
+.slot-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.slot-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #3730a3;
+  cursor: pointer;
+}
+
+.slot-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.slot-date {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 0.875rem;
+}
+
+.slot-time {
+  color: #3730a3;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.slot-status {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  width: fit-content;
+}
+
+.status-available {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-booked {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-blocked {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.slot-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.edit-btn, .delete-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.edit-btn {
+  background: #f0f9ff;
+  color: #0284c7;
+}
+
+.edit-btn:hover {
+  background: #0284c7;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.delete-btn {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.slot-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.slot-type, .slot-location, .slot-duration, .slot-fee {
+  background: #f8fafc;
+  color: #64748b;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.slot-fee {
+  background: #f0fdf4;
+  color: #166534;
+}
+
+/* Form Modal */
+.form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.availability-form-container {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 2rem 0 2rem;
+  border-bottom: 1px solid #f1f5f9;
+  margin-bottom: 2rem;
+}
+
+.form-header h3 {
+  color: #1e293b;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.close-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #f1f5f9;
+  border-radius: 10px;
+  color: #64748b;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: #e2e8f0;
+  color: #1e293b;
+  transform: rotate(90deg);
+}
+
+/* Form Styles */
+.availability-form {
+  padding: 0 2rem 2rem 2rem;
+}
+
+.form-section {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.form-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.form-section h4 {
+  color: #1e293b;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  color: #374151;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 0.875rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  background: white;
+  color: #1f2937;
+  font-weight: 500;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3730a3;
+  box-shadow: 0 0 0 3px rgba(55, 48, 163, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  color: #374151;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #3730a3;
+  cursor: pointer;
+}
+
+.char-count {
+  text-align: right;
+  color: #9ca3af;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.cancel-btn {
+  background: white;
+  color: #6b7280;
+  border: 2px solid #e5e7eb;
+  padding: 0.875rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+}
+
+.cancel-btn:hover {
+  border-color: #d1d5db;
+  color: #374151;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #3730a3 0%, #1e3a8a 100%);
+  color: white;
+  border: none;
+  padding: 0.875rem 2rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(55, 48, 163, 0.3);
+  font-size: 0.875rem;
+}
+
+.submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(55, 48, 163, 0.4);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .availability-content {
+    grid-template-columns: 1fr 350px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .availability-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .sidebar-section {
+    position: static;
+  }
+  
+  .availability-list {
+    max-height: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .provider-availability-container {
+    padding: 1rem;
+  }
+  
+  .page-header h1 {
+    font-size: 2rem;
+  }
+  
+  .page-header p {
+    font-size: 1rem;
+  }
+  
+  .calendar-header {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.25rem;
+  }
+  
+  .calendar-navigation {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .date-display h2 {
+    font-size: 1.25rem;
+    min-width: auto;
+  }
+  
+  .view-controls {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+  
+  .view-toggle {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .add-availability-btn {
+    width: 100%;
+    padding: 1rem;
+  }
+  
+  .calendar-section {
+    padding: 1.5rem;
+  }
+  
+  .calendar-placeholder {
+    height: 300px;
+  }
+  
+  .availability-form-container {
+    margin: 1rem;
+    max-height: calc(100vh - 2rem);
+  }
+  
+  .form-header {
+    padding: 1.5rem 1.5rem 0 1.5rem;
+  }
+  
+  .availability-form {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+  
+  .cancel-btn,
+  .submit-btn {
+    width: 100%;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .provider-availability-container {
+    padding: 0.5rem;
+  }
+  
+  .calendar-header {
+    padding: 1rem;
+  }
+  
+  .nav-button {
+    width: 36px;
+    height: 36px;
+    font-size: 1.125rem;
+  }
+  
+  .date-display h2 {
+    font-size: 1.125rem;
+  }
+  
+  .view-btn {
+    padding: 0.625rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .today-button,
+  .add-availability-btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .availability-slot {
+    padding: 0.75rem;
+  }
+  
+  .slot-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .slot-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  .notification {
+    left: 0.5rem;
+    right: 0.5rem;
+    max-width: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .provider-availability-container {
+    background: white;
+    padding: 0;
+  }
+  
+  .calendar-header,
+  .add-availability-btn,
+  .form-overlay,
+  .notification {
+    display: none;
+  }
+  
+  .availability-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .calendar-section,
+  .availability-list {
+    box-shadow: none;
+    border: 1px solid #e5e7eb;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .availability-slot {
+    border-width: 3px;
+  }
+  
+  .nav-button,
+  .view-btn,
+  .submit-btn {
+    border-width: 3px;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .availability-slot,
+  .nav-button,
+  .view-btn,
+  .submit-btn,
+  .edit-btn,
+  .delete-btn,
+  .notification {
+    transition: none;
+  }
+  
+  .availability-form-container {
+    animation: none;
+  }
+}
+
+/* Focus Styles for Accessibility */
+.nav-button:focus-visible,
+.view-btn:focus-visible,
+.add-availability-btn:focus-visible,
+.submit-btn:focus-visible,
+.cancel-btn:focus-visible,
+.edit-btn:focus-visible,
+.delete-btn:focus-visible,
+.form-group input:focus-visible,
+.form-group select:focus-visible,
+.form-group textarea:focus-visible {
+  outline: 2px solid #3730a3;
+  outline-offset: 2px;
+} 
