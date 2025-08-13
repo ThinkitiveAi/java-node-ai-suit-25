@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './Login.css';
 
-const Login = ({ onSwitchToRegister }) => {
+const Login = ({ onSwitchToRegister, onLogin }) => {
   const [formData, setFormData] = useState({
     loginIdentifier: '',
     password: '',
@@ -12,6 +12,7 @@ const Login = ({ onSwitchToRegister }) => {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [inputType, setInputType] = useState('');
+  const [loginError, setLoginError] = useState('');
 
   // Detect if input is email or phone
   const detectInputType = (value) => {
@@ -63,6 +64,11 @@ const Login = ({ onSwitchToRegister }) => {
         [name]: ''
       }));
     }
+
+    // Clear login error when user makes changes
+    if (loginError) {
+      setLoginError('');
+    }
     
     // Detect input type for login identifier
     if (name === 'loginIdentifier') {
@@ -78,14 +84,27 @@ const Login = ({ onSwitchToRegister }) => {
     }
     
     setIsLoading(true);
-    
-    // Simulate API call
+    setLoginError('');
+
+    // Simulate API call with a delay
     setTimeout(() => {
       setIsLoading(false);
-      // Here you would normally handle the actual login
-      console.log('Login attempt:', formData);
-      alert('Login functionality will be implemented with backend integration');
-    }, 1500);
+      
+      // For demo purposes, accept any valid input
+      if (detectInputType(formData.loginIdentifier) && formData.password.length >= 6) {
+        // Store demo user data
+        localStorage.setItem('demoUser', JSON.stringify({
+          name: 'Demo Patient',
+          email: formData.loginIdentifier,
+          isAuthenticated: true
+        }));
+        
+        // Call the onLogin callback
+        onLogin();
+      } else {
+        setLoginError('Invalid credentials. Please try again.');
+      }
+    }, 1000);
   };
 
   const handleForgotPassword = () => {
@@ -107,6 +126,12 @@ const Login = ({ onSwitchToRegister }) => {
           <h2>Welcome Back</h2>
           <p>Sign in to access your healthcare account</p>
         </div>
+
+        {loginError && (
+          <div className="error-banner">
+            {loginError}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="login-form" noValidate>
           <div className="form-group">
